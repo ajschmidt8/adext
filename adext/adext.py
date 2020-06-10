@@ -69,7 +69,7 @@ class AdExt(AlarmDecoder):
     def arm_night(
         self, code=None, code_arm_required=True, alt_night_mode=False, auto_bypass=False
     ):
-        "Arms an alarm panel in night mode"
+        """Arms an alarm panel in night mode"""
         arm_mode = ARM_NIGHT
         return self._arm_panel(
             arm_mode,
@@ -82,7 +82,7 @@ class AdExt(AlarmDecoder):
     def arm_home(
         self, code=None, code_arm_required=True, alt_night_mode=False, auto_bypass=False
     ):
-        "Arms an alarm panel in home/stay mode"
+        """Arms an alarm panel in home/stay mode"""
         arm_mode = ARM_HOME
         return self._arm_panel(
             arm_mode,
@@ -95,7 +95,7 @@ class AdExt(AlarmDecoder):
     def arm_away(
         self, code=None, code_arm_required=True, alt_night_mode=False, auto_bypass=False
     ):
-        "Arms an alarm panel in away mode"
+        """Arms an alarm panel in away mode"""
         arm_mode = ARM_AWAY
         return self._arm_panel(
             arm_mode,
