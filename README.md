@@ -13,7 +13,7 @@ Each method accepts the arguments described below to determine which key sequenc
 ## Arguments:
 
 - **code**: (`None` or `str`) - the code used to arm a panel (i.e. `'1234'`)
-- **auto_bypass**: (`bool`) - for Honeywell only. set to `True` to prefix an arming sequence with `<code> + 6#` in order to automatically bypass any faulted zones.
+- **auto_bypass**: (`bool`) - for Honeywell only. set to `True` to prefix an arming sequence with `<code> + 6#` in order to automatically bypass any faulted zones. This will require a code to be entered even if `code_arm_required` is set to `false`."
 - **code_arm_required**: (`bool`) - set to `False` to enable arming without a code. see [Arming Key Sequences](#Arming-Key-Sequences) below.
 - **alt_night_mode**: (`bool`) - For Honeywell systems, set to `true` to enable *Night-Stay* mode instead of *Instant* mode for night arming. For DSC systems, set to `true` to enable *No-Entry* mode instead of *Stay* mode for night arming. For both systems, whenever this option is set to `true`, a code will be required for night arming **regardless of the `code_arm_required` setting.** See [Arming Key Sequences](#Arming-Key-Sequences) section below for more information.
 

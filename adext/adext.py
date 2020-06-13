@@ -16,7 +16,7 @@ class AdExt(AlarmDecoder):
     """
 
     def _get_arm_sequence(
-        self, arm_mode, code, code_arm_required, alt_night_mode, auto_bypass
+        self, arm_mode, code, code_arm_required, auto_bypass, alt_night_mode=False,
     ):
         """
         Returns arming sequences based on panel brand & config settings
@@ -79,28 +79,22 @@ class AdExt(AlarmDecoder):
             auto_bypass=auto_bypass,
         )
 
-    def arm_home(
-        self, code=None, code_arm_required=True, alt_night_mode=False, auto_bypass=False
-    ):
+    def arm_home(self, code=None, code_arm_required=True, auto_bypass=False):
         """Arms an alarm panel in home/stay mode"""
         arm_mode = ARM_HOME
         return self._arm_panel(
             arm_mode,
             code=code,
             code_arm_required=code_arm_required,
-            alt_night_mode=alt_night_mode,
             auto_bypass=auto_bypass,
         )
 
-    def arm_away(
-        self, code=None, code_arm_required=True, alt_night_mode=False, auto_bypass=False
-    ):
+    def arm_away(self, code=None, code_arm_required=True, auto_bypass=False):
         """Arms an alarm panel in away mode"""
         arm_mode = ARM_AWAY
         return self._arm_panel(
             arm_mode,
             code=code,
             code_arm_required=code_arm_required,
-            alt_night_mode=alt_night_mode,
             auto_bypass=auto_bypass,
         )
