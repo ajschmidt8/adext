@@ -3,6 +3,7 @@
 ## v0.4 (unreleased)
 
 - Add changelog
+- Add CI
 
 ## v0.3
 
