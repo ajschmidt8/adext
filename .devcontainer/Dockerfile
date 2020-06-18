@@ -5,7 +5,7 @@
 
 # Update the VARIANT arg in devcontainer.json to pick a Python version: 3, 3.8, 3.7, 3.6
 ARG VARIANT=3
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/python:${VARIANT}
 
 # [Optional] If your requirements rarely change, uncomment this section to add them to the image.
 #

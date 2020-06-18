@@ -1,0 +1,15 @@
+name: PR Checks
+
+on: pull_request
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    container: python:3.8
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: pip install -e .; pip install pytest
+      - name: Run pytest
+        run: pytest
