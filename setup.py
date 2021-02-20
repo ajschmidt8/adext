@@ -18,7 +18,9 @@ setup(
     long_description_content_type="text/markdown",
     license="MIT",
     packages=["adext"],
-    install_requires=["alarmdecoder==1.13.2"],
+    install_requires=[
+        "alarmdecoder@https://github.com/nutechsoftware/alarmdecoder/tarball/d45be9f53884ed21a84fb848b18c17fdfcf86170#egg=alarmdecoder-1.13.9b"
+    ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
