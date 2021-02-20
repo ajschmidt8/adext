@@ -10,7 +10,8 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="adext",
-    version="0.3",
+    use_scm_version=True,
+    setup_requires=["setuptools_scm"],
     description="AlarmDecoder extended",
     url="https://github.com/ajschmidt8/adext",
     author="AJ Schmidt",
