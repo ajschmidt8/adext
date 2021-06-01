@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     license="MIT",
     packages=["adext"],
-    install_requires=["alarmdecoder==1.13.10"],
+    install_requires=["alarmdecoder==1.13.11"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
