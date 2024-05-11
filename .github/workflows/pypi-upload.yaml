@@ -7,7 +7,7 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-20.04
-    container: python:3.8
+    container: python:3.12
     steps:
     - uses: actions/checkout@v2
       with:

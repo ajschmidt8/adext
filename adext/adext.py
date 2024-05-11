@@ -2,6 +2,8 @@
 Extends the AlarmDecoder class to include helper methods for HomeAssistant
 """
 
+import asyncio
+
 from alarmdecoder.decoder import AlarmDecoder
 from alarmdecoder.panels import DSC, ADEMCO as HONEYWELL
 
@@ -14,6 +16,17 @@ class AdExt(AlarmDecoder):
     """
     Extended AlarmDecoder class
     """
+
+    def __init__(self, device, ignore_message_states=False, ignore_lrr_states=True):
+        super().__init__(device, ignore_message_states, ignore_lrr_states)
+        self._event = asyncio.Event()
+
+    def _handle_version(self, data):
+        super()._handle_version(data)
+        self._event.set()
+
+    async def is_init(self):
+        return (await self._event.wait())
 
     def _get_arm_sequence(
         self, arm_mode, code, code_arm_required, auto_bypass, alt_night_mode=False,
