@@ -16,7 +16,9 @@ jobs:
   release:
     permissions:
       # `contents: write` is required to create tags and create releases
+      # `id-token: write` is required for PyPI attestations
       contents: write
+      id-token: write
     runs-on: ubuntu-latest
     env:
       # RELEASE_VERSION: ${{ inputs.version }}
@@ -46,9 +48,4 @@ jobs:
       #       -F "prerelease=false" \
       #       -F "generate_release_notes=true"
       # - name: Publish package distributions to PyPI
-      #   # TODO: setup attestations and trusted publishing.
       #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     # attestations require trusted publishing which isn't setup yet
-      #     attestations: false
-      #     password: ${{ secrets.PYPI_TOKEN }}
