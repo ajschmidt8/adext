@@ -1,0 +1,20 @@
+# This workflow builds and tests code that is pushed to the `master` branch.
+
+name: merge
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          fetch-depth: 0
+      - name: Build and test
+        uses: ./.github/actions/build-and-test

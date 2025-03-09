@@ -1,0 +1,17 @@
+# This workflow builds and tests code in pull requests.
+
+name: pr
+
+on: pull_request
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          fetch-depth: 0
+      - name: Build and test
+        uses: ./.github/actions/build-and-test
