@@ -20,12 +20,26 @@ class AdExt(AlarmDecoder):
     def __init__(self, device, ignore_message_states=False, ignore_lrr_states=True):
         super().__init__(device, ignore_message_states, ignore_lrr_states)
         self._event = asyncio.Event()
+        # The loop is_init() waits on, so the reader thread can wake it.
+        try:
+            self._loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self._loop = None
 
     def _handle_version(self, data):
         super()._handle_version(data)
-        self._event.set()
+        # This runs on the alarmdecoder reader thread. asyncio.Event isn't
+        # thread-safe: setting it from here doesn't wake the event loop, so
+        # is_init() could sleep until something else happened to wake it.
+        loop = self._loop
+        if loop is not None and not loop.is_closed():
+            loop.call_soon_threadsafe(self._event.set)
+        else:
+            self._event.set()
 
     async def is_init(self):
+        if self._loop is None:
+            self._loop = asyncio.get_running_loop()
         return (await self._event.wait())
 
     def _get_arm_sequence(
