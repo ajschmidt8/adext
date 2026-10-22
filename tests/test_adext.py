@@ -1,5 +1,8 @@
 """Tests for adext"""
 
+import asyncio
+import threading
+import time
 from unittest.mock import Mock
 import pytest
 from alarmdecoder.panels import DSC, ADEMCO as HONEYWELL
@@ -144,3 +147,28 @@ def test_arm_night_no_alt():
         code="1234", code_arm_required=True, auto_bypass=True,
     )
     return ad.send.assert_called_once_with("12346#12347")
+
+
+VERSION_REPLY = "!VER:ffffffff,V2.2a.8.8,TX;RX;SM;VZ;RF;ZX;RE;AU;3X;CG;DD;MF;LR;KE;MK;CB;DS;ER"
+
+
+def test_is_init_wakes_on_version_from_reader_thread():
+    """The version reply arrives on the reader thread; is_init must wake right away"""
+
+    async def run():
+        ad = AdExt("device")
+        threading.Timer(0.05, ad._handle_version, args=(VERSION_REPLY,)).start()
+        start = time.monotonic()
+        await asyncio.wait_for(ad.is_init(), 2)
+        return time.monotonic() - start, ad
+
+    elapsed, ad = asyncio.run(run())
+    assert ad.serial_number == "ffffffff"
+    assert elapsed < 0.5
+
+
+def test_construct_outside_event_loop():
+    """AdExt can still be created without a running loop"""
+    ad = AdExt("device")
+    ad._handle_version(VERSION_REPLY)
+    assert ad._event.is_set()
